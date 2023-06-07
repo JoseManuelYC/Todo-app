@@ -1,13 +1,10 @@
 import { todoReducer } from "@/helpers/todoReducer";
+import { Todo } from "@/types/models/todo";
 import { useReducer } from "react";
 
-interface Todo{
-  id:number
-  todo:string
-  done:boolean
-}
+export type UseTodoActions = (todo: Todo) => void;
 
-const initialState:[]= [];
+const initialState: Todo[] = [];
 
 export const useTodo = () => {
   //1 function
@@ -16,31 +13,25 @@ export const useTodo = () => {
 
   const [todos, dispatch] = useReducer(todoReducer, initialState);
 
-  const handleNewTodo = (todo:Todo) => {
-    const action = {
-      type: "Add todo",
-      payload: todo,
-    };
+  const handleNewTodo = (todo: Todo) => {
+    const action = { type: "Add todo", payload: todo };
     dispatch(action);
   };
-  const handleDeleteTodo = (id:number) => {
-    dispatch({
-      type: "Remove todo",
-      payload: id,
-    });
+
+  const handleDeleteTodo = (todo: Todo) => {
+    dispatch({ type: "Remove todo", payload: todo });
   };
-  const handleCheckTodo = (id:number) => {
-    dispatch({
-      type: "Check todo",
-      payload: id,
-    });
+
+  const handleCheckTodo = (todo: Todo) => {
+    dispatch({ type: "Check todo", payload: todo });
   };
+
   return {
     todos,
-    handleDeleteTodo,
-    handleCheckTodo,
     handleNewTodo,
+    handleCheckTodo,
+    handleDeleteTodo,
     todosCount: todos.length,
-    pendingTodos: todos.filter((todo:Todo) => !todo.done).length,
+    pendingTodos: todos.filter((todo: Todo) => !todo.done).length,
   };
 };
