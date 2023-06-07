@@ -7,7 +7,7 @@ interface Todo{
   done:boolean
 }
 
-const initialState:any[]= [];
+const initialState:[]= [];
 
 export const useTodo = () => {
   //1 function
@@ -23,7 +23,7 @@ export const useTodo = () => {
     };
     dispatch(action);
   };
-  const handleDeleteTodo = (id) => {
+  const handleDeleteTodo = (id:number) => {
     dispatch({
       type: "Remove todo",
       payload: id,
@@ -41,6 +41,6 @@ export const useTodo = () => {
     handleCheckTodo,
     handleNewTodo,
     todosCount: todos.length,
-    pendingTodos: todos.filter((todo) => !todo.done).length,
+    pendingTodos: todos.filter((todo:Todo) => !todo.done).length,
   };
 };

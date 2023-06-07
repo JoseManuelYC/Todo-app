@@ -1,6 +1,6 @@
 import { useForm } from "@/hooks/useForm"
 
-interface AggTodo {
+interface Todo {
   id: number
   todo:string
   done:boolean
@@ -9,10 +9,10 @@ export default function AddTodo({onNewTodo}:any){
   const {todo , onNewValue, onResetForm } = useForm({
     todo:"",
   })
-  const submitForm = (e: React.SyntheticEvent) => {
+  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(todo.length<=1) return;
-    const newTodo:AggTodo = {
+    const newTodo:Todo = {
       id: new Date().getTime()*2,
       todo,
       done:false
