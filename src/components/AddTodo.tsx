@@ -9,7 +9,7 @@ type AddTodoProps = {
 const initialValue = {
   todo: "",
   done: false,
-  id: new Date().getTime() * 2,
+  id: Math.floor(Math.random() * 10),
 };
 
 export default function AddTodo({ onNewTodo }: AddTodoProps) {
@@ -20,7 +20,13 @@ export default function AddTodo({ onNewTodo }: AddTodoProps) {
 
     if (formState.todo.length <= 1) return;
 
-    onNewTodo(formState);
+    const newTodo = {
+      id: Math.floor(Math.random() * 100),
+      todo: formState.todo,
+      done: false,
+    };
+
+    onNewTodo(newTodo);
     onResetForm();
   };
 
